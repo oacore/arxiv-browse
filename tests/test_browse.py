@@ -340,12 +340,14 @@ class BrowseTest(unittest.TestCase):
         title_elmt = html.find('h1', 'title')
         self.assertTrue(title_elmt, 'Should title element')
 
-        ida = title_elmt.find('a')
-        self.assertTrue(ida, 'Should be <a> tag in title')
-
+        idas = title_elmt.find_all('a')
+        self.assertTrue(idas, 'Should be <a> tag in title')
+        self.assertEqual(len(idas), 1,
+                         'Should only be one <a> tag in title, the one for the'
+                         ' arxiv id, not one for whotracks.me (see ARXIVNG-2109)')
+        ida = idas[0]
         self.assertIsNotNone(ida['href'], '<a> tag in title should have href')
         self.assertEqual(ida['href'], 'https://arxiv.org/abs/1501.99998')
-
         self.assertEqual(ida.text, '1501.99998')
 
         au_a_tags = html.find('div', 'authors').find_all('a')
