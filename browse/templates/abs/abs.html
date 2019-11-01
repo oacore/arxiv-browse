@@ -69,6 +69,35 @@
     {% if config['LABS_BIBEXPLORER_ENABLED'] %}
     <script src="/bibex/bibex.js?20181010" type="text/javascript" defer></script>
     {% endif %}
+    {% if config['LABS_CORE_ENABLED']  %}
+          <script>
+                  (function (d, s, idScript, idRec, userInput) {
+                      var coreAddress = 'https://core.ac.uk/';
+                      var js, fjs = d.getElementsByTagName(s)[0];
+                      if (d.getElementById(idScript))
+                          return;
+                      js = d.createElement(s);
+                      js.id = idScript;
+                      js.src = coreAddress + 'recommender/embed.js';
+                      fjs.parentNode.insertBefore(js, fjs);
+
+                      localStorage.setItem('idRecommender', idRec);
+                      localStorage.setItem('userInput', JSON.stringify(userInput));
+                      // To force the recommender to output in a specific lanuage, uncomment the field below
+                      // localStorage.setItem('overridelocale', "en_GB");
+
+                      var link = d.createElement('link');
+                      link.setAttribute('rel', 'stylesheet');
+                      link.setAttribute('type', 'text/css');
+                      link.setAttribute('href', coreAddress + 'recommender/embed-arxiv-style.css');
+                      d.getElementsByTagName('head')[0].appendChild(link);
+                  }(document, 'script', 'recommender-embed', '24c597', {}));
+              </script>
+
+
+              <div id="coreRecommenderOutput">
+              </div>
+    {% endif %}
 
 </div>
 {% endblock content %}
