@@ -56,4 +56,7 @@ function coreRecommender() {
                           d.getElementsByTagName('head')[0].appendChild(link);
         }(document, 'script', 'recommender-embed', '24c597', {}));
     }
+    else {
+       d.getElementById("corerec_toggle").innerHTML="Enable the CORE Recommendations"
+    }
 }
